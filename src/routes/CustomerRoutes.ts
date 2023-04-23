@@ -16,10 +16,10 @@ export default class CustomerRoutes {
     //GET /api/v1/post
     this.router.get("/", this.customerController.retrieveAllCustomers);
     
-    //PUT /api/v1/post/:id
+    //PUT /api/v1/post/:nic
     this.router.put("/:nic", this.customerController.updateCustomer);
     
-    //DELETE /api/v1/post/:id
+    //DELETE /api/v1/post/:nic
     this.router.delete("/:nic", this.customerController.deleteCustomer);
   };
 
