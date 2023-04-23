@@ -58,7 +58,7 @@ https://github.com/Pasan-Pahasara/REST-API.git
 ![GitHub Contributions](https://img.shields.io/github/contributors/Pasan-Pahasara/REST-API?&labelColor=black&color=8854d0&style=for-the-badge)
 
 ### License 📝
-[![GitHub license](https://img.shields.io/github/license/Pasan-Pahasara/REST-API?&labelColor=black&color=3867d6&style=for-the-badge)](https://github.com/Pasan-Pahasara/REST-API/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Pasan-Pahasara/REST-API?&labelColor=black&color=3867d6&style=for-the-badge)](https://github.com/Pasan-Pahasara/REST-API/blob/main/License)
 
 <div align="center">
 
