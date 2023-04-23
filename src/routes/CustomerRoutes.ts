@@ -4,6 +4,7 @@ import CustomerController from "../controllers/CustomerController";
 export default class CustomerRoutes {
   private router: Router = express.Router();
   private customerController: CustomerController = new CustomerController();
+    static getRouter: any;
 
   constructor() {
     this.configRoutes();
