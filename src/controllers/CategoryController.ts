@@ -11,11 +11,10 @@ export default class CategoryController {
       let category = new Category(req.body);
       let newCategory = await category.save();
 
-      return res.status(200)
-        .json({
-          message: "New Category Added Successfully..!",
-          responseData: newCategory,
-        });
+      return res.status(200).json({
+        message: "New Category Added Successfully..!",
+        responseData: newCategory,
+      });
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
@@ -30,7 +29,16 @@ export default class CategoryController {
     res: Response
   ): Promise<Response> => {
     //read operation
-    return res;
+    try {
+      let categories = Category.find();
+      return res.status(200).json({ responseData: categories });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured!" });
+      }
+    }
   };
 
   updateCategory: RequestHandler = async (
