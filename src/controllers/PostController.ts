@@ -73,11 +73,10 @@ export default class PostController {
     }
   };
 
-  retrieveAllPost: RequestHandler = async (
+  retrieveAllPosts: RequestHandler = async (
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //read operation
     try {
       const posts = await Post.find();
       return res.status(200).json({ responseData: posts });
@@ -94,7 +93,6 @@ export default class PostController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //update operation
     try {
       const { id } = req.params;
       let updatedPost = await Post.findByIdAndUpdate(id, req.body, {
@@ -116,7 +114,6 @@ export default class PostController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //delete operation
     try {
       const { id } = req.params;
       let deletedPost = await Post.findByIdAndDelete(id);

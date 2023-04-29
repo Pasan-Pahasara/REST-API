@@ -24,4 +24,4 @@ const CustomerSchema = new Schema(
   { timestamps: true }
 );
 
-export const customer = model<ICustomer>("Customer", CustomerSchema);
+export const Customer = model<ICustomer>("Customer", CustomerSchema);

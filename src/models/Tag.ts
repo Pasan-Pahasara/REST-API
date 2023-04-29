@@ -4,6 +4,7 @@ export interface ITag extends Document {
   text: string;
 }
 
+// creating schema
 const TagSchema = new Schema(
   {
     text: {
@@ -14,4 +15,4 @@ const TagSchema = new Schema(
   { timestamps: true }
 );
 
-export const Tag = model<ITag>("User, UserSchema");
+export const Tag = model<ITag>("Tag", TagSchema);

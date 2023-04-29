@@ -33,4 +33,4 @@ const OrderSchema = new Schema(
   { timestamps: true }
 );
 
-export const user = model<IOrder>("Order", OrderSchema);
+export const Order = model<IOrder>("Order", OrderSchema);

@@ -1,7 +1,6 @@
 import { Document, Schema, model } from "mongoose";
 
-interface IPost extends Document {
-  id: string;
+export interface IPost extends Document {
   title: string;
   description: string;
   hoursCount?: number;
@@ -10,6 +9,7 @@ interface IPost extends Document {
   categoryId: string;
 }
 
+// creating schema
 const PostSchema = new Schema(
   {
     title: {
