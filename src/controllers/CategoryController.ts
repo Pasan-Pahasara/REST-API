@@ -73,6 +73,28 @@ export default class CategoryController {
     res: Response
   ): Promise<Response> => {
     //delete operation
-    return res;
+    try {
+        //destructuring assignment
+        const { id } = req.params;
+  
+        let isDeleted = await Category.findByIdAndDelete(id); //new true karanna ona live update vennanam response eka
+
+        if (!isDeleted) {
+            throw new Error("Faild to Delete Category!")
+        }
+
+        return res
+          .status(200)
+          .json({
+            message: "Deleted Category Successfully..!",
+            responseData: isDeleted,
+          });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          return res.status(500).json({ message: error.message });
+        } else {
+          return res.status(500).json({ message: "Unknown error occured!" });
+        }
+      }
   };
 }
