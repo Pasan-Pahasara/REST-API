@@ -46,7 +46,26 @@ export default class CategoryController {
     res: Response
   ): Promise<Response> => {
     //update operation
-    return res;
+    try {
+      //destructuring assignment
+      const { id } = req.params;
+
+      let updatedCategory = await Category.findByIdAndUpdate(id, req.body, {
+        new: true,
+      }); //new true karanna ona live update vennanam response eka
+      return res
+        .status(200)
+        .json({
+          message: "Updated Category Successfully..!",
+          responseData: updatedCategory,
+        });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured!" });
+      }
+    }
   };
 
   deleteCategory: RequestHandler = async (
