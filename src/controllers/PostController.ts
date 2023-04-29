@@ -1,4 +1,5 @@
 import { RequestHandler, Request, Response } from "express";
+import mongoose, { ClientSession } from "mongoose";
 
 export default class PostController {
   createPost: RequestHandler = async (
@@ -6,7 +7,22 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //create operation
-    return res;
+  //   let session:ClientSession | null=null;
+  //   try{
+  //     const{categoryName} =req.body;u
+
+  //     session= await mongoose.startSession();
+  //     session.startTransaction();
+
+
+  // } catch (error: unknown) {
+  //   if (error instanceof Error) {
+  //     return res.status(500).json({ message: error.message });
+  //   } else {
+  //     return res.status(500).json({ message: "Unknown error occured." });
+  //   }
+  // }
+  return res;
   };
 
   retrieveAllPost: RequestHandler = async (
