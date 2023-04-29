@@ -78,7 +78,16 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //read operation
-    return res;
+    try {
+      const posts = await Post.find();
+      return res.status(200).json({ responseData: posts });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
   };
 
   updatePost: RequestHandler = async (
