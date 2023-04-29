@@ -77,9 +77,9 @@ export default class CategoryController {
         //destructuring assignment
         const { id } = req.params;
   
-        let isDeleted = await Category.findByIdAndDelete(id); //new true karanna ona live update vennanam response eka
+        let deletedCategory = await Category.findByIdAndDelete(id); //new true karanna ona live update vennanam response eka
 
-        if (!isDeleted) {
+        if (!deletedCategory) {
             throw new Error("Faild to Delete Category!")
         }
 
@@ -87,7 +87,7 @@ export default class CategoryController {
           .status(200)
           .json({
             message: "Deleted Category Successfully..!",
-            responseData: isDeleted,
+            responseData: deletedCategory,
           });
       } catch (error: unknown) {
         if (error instanceof Error) {
