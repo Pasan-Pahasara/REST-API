@@ -14,4 +14,4 @@ const CategorySchema = new Schema(
   { timestamps: true }
 );
 
-export const category = model<ICategory>("Category", CategorySchema);
+export const Category = model<ICategory>("Category", CategorySchema);
