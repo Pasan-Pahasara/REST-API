@@ -35,7 +35,14 @@ npm install --save-dev @types/express
 npm install dotenv
 ```
 #  
-
+- **`Here You Can Add More Origins To Allow CORS`**
+```
+npm install cors
+```
+```
+npm install @types/cors
+```
+#
 - **`Not Detected Node Modules`**
 ```
 npm install
