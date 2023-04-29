@@ -7,6 +7,7 @@ interface IPost extends Document {
   hoursCount?: number;
   lecturerName?: string;
   tags: string[];
+  categoryId: string;
 }
 
 const PostSchema = new Schema(
@@ -29,6 +30,10 @@ const PostSchema = new Schema(
     },
     tags: {
       type: Array<String>,
+      required: true,
+    },
+    categoryId: {
+      type: String,
       required: true,
     },
   },
