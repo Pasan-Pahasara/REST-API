@@ -3,7 +3,7 @@ import PostController from "../controllers/PostController";
 
 export default class PostRoutes {
   private router: Router = express.Router();
-  private postContoller: PostController = new PostController();
+  private postController: PostController = new PostController();
 
   constructor() {
     this.configRoutes();
@@ -11,16 +11,19 @@ export default class PostRoutes {
 
   private configRoutes = (): void => {
     //POST /api/v1/post
-    this.router.post("/", this.postContoller.createPost);
+    this.router.post("/", this.postController.createPost);
 
     //GET /api/v1/post
-    this.router.get("/", this.postContoller.retrieveAllPost);
-    
+    this.router.get("/", this.postController.retrieveAllPost);
+
     //PUT /api/v1/post/:id
-    this.router.put("/:id", this.postContoller.updatePost);
-    
+    this.router.put("/:id", this.postController.updatePost);
+
     //DELETE /api/v1/post/:id
-    this.router.delete("/:id", this.postContoller.deletePost);
+    this.router.delete("/:id", this.postController.deletePost);
+
+    // GET /api/v1/post/category/:id
+    this.router.get("/category/:id", this.postController.searchPostByCategory);
   };
 
   public getRouter = (): Router => {
