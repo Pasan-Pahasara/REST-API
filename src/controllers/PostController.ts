@@ -117,6 +117,36 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //delete operation
-    return res;
+    try {
+      const { id } = req.params;
+      let deletedPost = await Post.findByIdAndDelete(id);
+
+      return res
+        .status(200)
+        .json({ message: "Post deleted.", responseData: deletedPost });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
+
+  searchPostByCategory = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const { id } = req.params;
+      let posts = await Post.find({ categoryId: id });
+      return res.status(200).json({ responseData: posts });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
   };
 }
