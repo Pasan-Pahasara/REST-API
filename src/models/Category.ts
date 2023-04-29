@@ -1,15 +1,15 @@
 import { Document, Schema, model } from "mongoose";
 
-interface ICategory extends Document {
-    category: string;
-  }
+export interface ICategory extends Document {
+  categoryName: string;
+}
 
 const CategorySchema = new Schema(
   {
     categoryName: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

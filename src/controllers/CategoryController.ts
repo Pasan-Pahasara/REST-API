@@ -1,4 +1,4 @@
-import { RequestHandler, Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import { Category } from "../models/Category";
 
 export default class CategoryController {
@@ -6,20 +6,28 @@ export default class CategoryController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //create operation
     try {
-      let category = new Category(req.body);
-      let newCategory = await category.save();
+      // destructuring assignment
+      const { categoryName } = req.body;
 
-      return res.status(200).json({
-        message: "New Category Added Successfully..!",
-        responseData: newCategory,
-      });
+      // check whether the relevant category already exists or not
+      let category = await Category.findOne({ categoryName: categoryName });
+      if (!category) {
+        // save category only the category  name is not existing
+        category = new Category({ categoryName: categoryName });
+        category = await category.save();
+
+        return res
+          .status(200)
+          .json({ message: "New category added.!", responseData: category });
+      } else {
+        return res.status(200).json({ message: "Already exists." });
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
       } else {
-        return res.status(500).json({ message: "Unknown error occured!" });
+        return res.status(500).json({ message: "Unknown error occured." });
       }
     }
   };
@@ -28,15 +36,14 @@ export default class CategoryController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //read operation
     try {
-      let categories = Category.find();
+      let categories = await Category.find();
       return res.status(200).json({ responseData: categories });
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
       } else {
-        return res.status(500).json({ message: "Unknown error occured!" });
+        return res.status(500).json({ message: "Unknown error occured." });
       }
     }
   };
@@ -45,56 +52,45 @@ export default class CategoryController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    //update operation
     try {
-      //destructuring assignment
+      // destructuring assignment
       const { id } = req.params;
 
       let updatedCategory = await Category.findByIdAndUpdate(id, req.body, {
         new: true,
-      }); //new true karanna ona live update vennanam response eka
+      });
       return res
         .status(200)
-        .json({
-          message: "Updated Category Successfully..!",
-          responseData: updatedCategory,
-        });
+        .json({ message: "Category updated.", responseData: updatedCategory });
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
       } else {
-        return res.status(500).json({ message: "Unknown error occured!" });
+        return res.status(500).json({ message: "Unknown error occured." });
       }
     }
   };
 
-  deleteCategory: RequestHandler = async (
-    req: Request,
-    res: Response
-  ): Promise<Response> => {
-    //delete operation
+  deleteCategory = async (req: Request, res: Response): Promise<Response> => {
     try {
-        //destructuring assignment
-        const { id } = req.params;
-  
-        let deletedCategory = await Category.findByIdAndDelete(id); //new true karanna ona live update vennanam response eka
+      // destructuring assignment
+      const { id } = req.params;
 
-        if (!deletedCategory) {
-            throw new Error("Faild to Delete Category!")
-        }
+      let deletedCategory = await Category.findByIdAndDelete(id);
 
-        return res
-          .status(200)
-          .json({
-            message: "Deleted Category Successfully..!",
-            responseData: deletedCategory,
-          });
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          return res.status(500).json({ message: error.message });
-        } else {
-          return res.status(500).json({ message: "Unknown error occured!" });
-        }
+      if (!deletedCategory) {
+        throw new Error("Failed to delete post.");
       }
+
+      return res
+        .status(200)
+        .json({ message: "Category deleted.", responseData: deletedCategory });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
   };
 }

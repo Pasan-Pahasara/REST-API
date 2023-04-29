@@ -10,16 +10,16 @@ export default class CategoryRoutes {
   }
 
   private configRoutes = (): void => {
-    //POST /api/v1/post
+    // POST /api/v1/category
     this.router.post("/", this.categoryController.createCategory);
 
-    //GET /api/v1/post
+    // GET /api/v1/category
     this.router.get("/", this.categoryController.retrieveAllCategories);
-    
-    //PUT /api/v1/post/:id
+
+    // PUT /api/v1/category/:id
     this.router.put("/:id", this.categoryController.updateCategory);
-    
-    //DELETE /api/v1/post/:id
+
+    // DELETE /api/v1/category/:id
     this.router.delete("/:id", this.categoryController.deleteCategory);
   };
 
