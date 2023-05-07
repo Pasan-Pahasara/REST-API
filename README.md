@@ -53,6 +53,10 @@ npm install
 npm start
 ```
 
+- **`Test POSTMAN`**
+```
+https://documenter.getpostman.com/view/24952393/2s93eYTXFv
+```
 #  
 #### Clone this repository ✅
 ```md
